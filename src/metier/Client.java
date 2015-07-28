@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private int idclient;
+    private int idClient;
     private String raisonsociale;
     private String adresse;
     private String codepostal;
@@ -21,7 +21,7 @@ public class Client {
     }
 
     public Client(int idClient){
-    	this.idclient = idClient;
+    	this.idClient = idClient;
     }
     
     public Client(String raisonsociale) {
@@ -29,7 +29,7 @@ public class Client {
     }
 
     public Client(int idclient, String raisonsociale, String adresse, String codepostal, String ville, String telephone) {
-        this.idclient = idclient;
+        this.idClient = idclient;
         this.raisonsociale = raisonsociale;
         this.adresse = adresse;
         this.codepostal = codepostal;
@@ -37,8 +37,12 @@ public class Client {
         this.telephone = telephone;
     }
 
-    public void setIdclient(int idclient) {
-        this.idclient = idclient;
+    public int getIdClient(){
+    	return this.idClient;
+    }
+    
+    public void setIdClient(int idclient) {
+        this.idClient = idclient;
     }
 
     public void setRaisonsociale(String raisonsociale) {
@@ -62,7 +66,7 @@ public class Client {
     }
 
     public int getIdclient() {
-        return idclient;
+        return idClient;
     }
 
     public String getRaisonsociale() {

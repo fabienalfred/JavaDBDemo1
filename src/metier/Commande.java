@@ -7,7 +7,6 @@ import java.util.List;
 public class Commande {
     private int numCom;
     private Date dateCom;
-    private int idClient;
     private List<Lot> listLots = new ArrayList<>();
     
     public Commande(){
@@ -17,10 +16,9 @@ public class Commande {
 		this.numCom = numCom ;
 	}
     
-    public Commande(int numCom, Date dateCom, Date dateLiv, int idClient){
+    public Commande(int numCom, Date dateCom, Date dateLiv){
         this.numCom = numCom;
         this.dateCom = dateCom;
-        this.idClient = idClient;
     }
 
 	public int getNumCom() {
@@ -38,14 +36,6 @@ public class Commande {
 	public void setDateCom(Date dateCom) {
 		this.dateCom = dateCom;
 	}
-
-	public int getIdClient() {
-        return idClient;
-    }
-
-    public void setIdClient(int qtestock) {
-        this.idClient = qtestock;
-    }
 
 	public List<Lot> getListLots() {
 		return listLots;

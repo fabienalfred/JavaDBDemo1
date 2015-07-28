@@ -2,7 +2,7 @@ package metier;
 
 public class Lot {
 	private Article article;
-	private int qteStock;
+	private int qteCom;
 	
 	public Lot() {
 		
@@ -10,7 +10,7 @@ public class Lot {
 	
 	public Lot(Article article, int qteStock){
 		this.article = article;
-		this.qteStock = qteStock;
+		this.qteCom = qteStock;
 	}
 
 	public Article getArticle() {
@@ -21,12 +21,12 @@ public class Lot {
 		this.article = article;
 	}
 
-	public int getQteStock() {
-		return qteStock;
+	public int getQteCom() {
+		return qteCom;
 	}
 
-	public void setQteStock(int qteStock) {
-		this.qteStock = qteStock;
+	public void setQteCom(int qteStock) {
+		this.qteCom = qteStock;
 	}
 	
 	

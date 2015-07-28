@@ -11,21 +11,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import metier.Client;
 import metier.Commande;
+import metier.Lot;
 import util.BddFab;
 
-public class DaoClient {
-	public static void insert(Client client) {
+public class DaoLot {
+	public static void insert(Commande commande, Lot lot) {
 		try {
 			Connection conn = BddFab.connect();
-			String sql = "insert into client values (?,?,?,?,?,?, null)";
+			String sql = "insert into Ligne_com values (?,?,null,?)";
 			java.sql.PreparedStatement stat = conn.prepareStatement(sql);
 
-			stat.setInt(1, client.getIdclient());
-			stat.setString(2, client.getRaisonsociale());
-			stat.setString(3, client.getAdresse());
-			stat.setString(4, client.getCodepostal());
-			stat.setString(5, client.getVille());
-			stat.setString(6, client.getTelephone());
+			stat.setInt(1, commande.getNumCom());
+			stat.setInt(2, lot.getArticle().getIdArticle());
+			stat.setInt(3, lot.getQteCom());
 
 			stat.executeUpdate();
 			System.out.println("Une ligne inserée.");
@@ -33,7 +31,7 @@ public class DaoClient {
 			BddFab.disconnect(conn);
 			;
 		} catch (SQLException ex) {
-			Logger.getLogger(DaoClient.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DaoLot.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
@@ -55,25 +53,31 @@ public class DaoClient {
 			BddFab.commit(conn);
 			BddFab.disconnect(conn);
 		} catch (SQLException ex) {
-			Logger.getLogger(DaoClient.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DaoLot.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
 
-	public static void delete(Client client) {
+	public static void delete(Commande commande, Lot lot) {
 		try {
 			Connection conn = BddFab.connect();
-			String sql = "delete from client where idclient = ? ";
+			String sql = "delete from Ligne_com where numcom = ? and idarticle = ?";
 			java.sql.PreparedStatement stat = conn.prepareStatement(sql);
 
-			stat.setInt(1, client.getIdclient());
+			stat.setInt(1, commande.getNumCom());
+			stat.setInt(2, lot.getArticle().getIdArticle());
 
 			stat.executeUpdate();
 			System.out.println("Une ligne supprimée.");
+			
+//			sql = "update Article set qtestock = qtestock+?";
+//			stat = conn.prepareStatement(sql);
+//			stat.setInt(1, lot.getQteCom());
+//			System.out.println("Stock mis à jour");
 			BddFab.commit(conn);
 			BddFab.disconnect(conn);
 		} catch (SQLException ex) {
-			Logger.getLogger(DaoClient.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DaoLot.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
@@ -92,7 +96,7 @@ public class DaoClient {
 			BddFab.disconnect(conn);
 			return id;
 		} catch (SQLException ex) {
-			Logger.getLogger(DaoClient.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DaoLot.class.getName()).log(Level.SEVERE, null, ex);
 			return 0;
 		}
 
@@ -115,13 +119,12 @@ public class DaoClient {
 			BddFab.disconnect(conn);
 
 		} catch (SQLException ex) {
-			Logger.getLogger(DaoClient.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DaoLot.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return listeClient;
 
 	}
     
-	/** Remplit la liste des commandes d'un client donné **/
     public static void setListCommandesByIdclient(Client client){
         try {
             Connection conn = BddFab.connect();
