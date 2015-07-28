@@ -20,7 +20,12 @@ public class Article {
         this.qtestock = qte;
     }
 
-    /**
+    public Article(int idArticle, String des) {
+		this.idArticle = idArticle;
+		this.designation = des;
+	}
+
+	/**
      * @return the idArticle
      */
     public int getIdArticle() {

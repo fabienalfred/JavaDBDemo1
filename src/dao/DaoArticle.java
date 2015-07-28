@@ -33,22 +33,16 @@ public class DaoArticle {
         }
     }
     
-    public static void update(Article article){
+    public static void updateStock(Article article){
         try {
             Connection conn = BddFab.connect();
             String query = "update Article "
-                    + "set idarticle = ?, "
-                    + "designation = ?, "
-                    + "prixunit = ?, "
-                    + "qtestock = ? "
+                    + "set qtestock = ? "
                     + "where idarticle = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             
-            pstmt.setInt(1, article.getIdArticle());
-            pstmt.setString(2, article.getDesignation());
-            pstmt.setFloat(3, article.getPrixUnit());
-            pstmt.setInt(4, article.getQtestock());
-            pstmt.setInt(5, article.getIdArticle());
+            pstmt.setInt(1, article.getQtestock());
+            pstmt.setInt(2, article.getIdArticle());
             
             if(pstmt.executeUpdate()==0)
                 System.out.println("Aucun enregistrement correspondant");
